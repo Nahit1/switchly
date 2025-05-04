@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "2yLj/qsAjSKAwzu38Onb8rPWW9hmjJfcoHyUG0zCaZE=",
+  "Source": "Switchly.API",
+  "BasePath": "_content/Switchly.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

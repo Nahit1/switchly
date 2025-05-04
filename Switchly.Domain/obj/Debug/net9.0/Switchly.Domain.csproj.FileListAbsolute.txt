@@ -1,0 +1,11 @@
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/bin/Debug/net9.0/Switchly.Domain.deps.json
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/bin/Debug/net9.0/Switchly.Domain.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/bin/Debug/net9.0/Switchly.Domain.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.AssemblyInfoInputs.cache
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.AssemblyInfo.cs
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.csproj.CoreCompileInputs.cache
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/refint/Switchly.Domain.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/ref/Switchly.Domain.dll

@@ -1,0 +1,17 @@
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/bin/Debug/net9.0/Switchly.Persistence.deps.json
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/bin/Debug/net9.0/Switchly.Persistence.runtimeconfig.json
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/bin/Debug/net9.0/Switchly.Persistence.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/bin/Debug/net9.0/Switchly.Persistence.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/bin/Debug/net9.0/Switchly.Domain.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/bin/Debug/net9.0/Switchly.Domain.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.csproj.AssemblyReference.cache
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.AssemblyInfoInputs.cache
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.AssemblyInfo.cs
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.csproj.CoreCompileInputs.cache
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.03E0C85D.Up2Date
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/refint/Switchly.Persistence.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.genruntimeconfig.cache
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/ref/Switchly.Persistence.dll
