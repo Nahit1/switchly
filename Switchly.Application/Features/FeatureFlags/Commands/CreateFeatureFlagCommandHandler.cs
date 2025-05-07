@@ -17,6 +17,7 @@ public class CreateFeatureFlagCommandHandler : IRequestHandler<CreateFeatureFlag
         var flag = await _featureFlagService.CreateFeatureFlagAsync(
             request.OrganizationId,
             request.Key,
+            request.Name,
             request.Description,
             cancellationToken);
 

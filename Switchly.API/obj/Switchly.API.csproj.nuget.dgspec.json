@@ -13,6 +13,7 @@
         "packagesPath": "/Users/nahitferhat/.nuget/packages/",
         "outputPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.API/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/nahitferhat/.nuget/NuGet/NuGet.Config"
         ],
@@ -47,8 +48,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -71,6 +71,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[8.1.1, )"
             }
           },
           "imports": [
@@ -105,6 +109,7 @@
         "packagesPath": "/Users/nahitferhat/.nuget/packages/",
         "outputPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Application/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/nahitferhat/.nuget/NuGet/NuGet.Config"
         ],
@@ -136,8 +141,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -185,6 +189,7 @@
         "packagesPath": "/Users/nahitferhat/.nuget/packages/",
         "outputPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/nahitferhat/.nuget/NuGet/NuGet.Config"
         ],
@@ -209,8 +214,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -244,6 +248,7 @@
         "packagesPath": "/Users/nahitferhat/.nuget/packages/",
         "outputPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Infrastructure/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/nahitferhat/.nuget/NuGet/NuGet.Config"
         ],
@@ -272,8 +277,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -325,6 +329,7 @@
         "packagesPath": "/Users/nahitferhat/.nuget/packages/",
         "outputPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/nahitferhat/.nuget/NuGet/NuGet.Config"
         ],
@@ -353,8 +358,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net9.0": {

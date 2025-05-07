@@ -16,7 +16,7 @@ namespace Switchly.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Evaluate([FromBody] EvaluateFeatureFlagRequest request)
         {
-            var isEnabled = await _evaluator.IsEnabledAsync(request.FlagKey, request.UserContext);
+            var isEnabled = await _evaluator.IsEnabledAsync(request.FlagKey, request.UserContextModel);
             return Success(new { enabled = isEnabled });
         }
     }

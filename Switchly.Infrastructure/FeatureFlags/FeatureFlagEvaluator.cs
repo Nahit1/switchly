@@ -12,7 +12,7 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
         _dbContext = dbContext;
     }
 
-    public async Task<bool> IsEnabledAsync(string flagKey, UserContext user)
+    public async Task<bool> IsEnabledAsync(string flagKey, UserContextModel user)
     {
         var flag = await _dbContext.FeatureFlags
             .Include(f => f.SegmentRules)
@@ -25,9 +25,9 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
         {
             var match = rule.Property switch
             {
-                "user.id" => Evaluate(rule.Operator, user.UserId.ToString(), rule.Value),
-                "user.role" => Evaluate(rule.Operator, user.Role, rule.Value),
-                "user.country" => Evaluate(rule.Operator, user.Country, rule.Value),
+                "id" => Evaluate(rule.Operator, user.UserId.ToString(), rule.Value),
+                "role" => Evaluate(rule.Operator, user.Role, rule.Value),
+                "country" => Evaluate(rule.Operator, user.Country, rule.Value),
                 _ => user.Traits.TryGetValue(rule.Property, out var val) &&
                      Evaluate(rule.Operator, val, rule.Value)
             };

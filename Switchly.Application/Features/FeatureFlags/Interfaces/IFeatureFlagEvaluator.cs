@@ -1,4 +1,4 @@
 public interface IFeatureFlagEvaluator
 {
-    Task<bool> IsEnabledAsync(string flagKey, UserContext user);
+    Task<bool> IsEnabledAsync(string flagKey, UserContextModel user);
 }

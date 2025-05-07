@@ -4,5 +4,5 @@ using Switchly.Application.FeatureFlags.Dtos;
 
 namespace Switchly.Application.FeatureFlags.Queries;
 
-public record GetAllFeatureFlagsQuery(Guid OrganizationId) 
+public record GetAllFeatureFlagsQuery()
     : IRequest<ApiResponse<List<FeatureFlagDto>>>;

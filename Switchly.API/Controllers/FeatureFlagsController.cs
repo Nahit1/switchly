@@ -24,14 +24,15 @@ namespace Switchly.API.Controllers
             // Örnek placeholder response
             return Success(new { id });
         }
-        
-        [HttpGet("organization/{organizationId}")]
-        public async Task<IActionResult> GetAllByOrganization(Guid organizationId)
+
+        [HttpGet("get-all")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<IActionResult> GetAllByOrganization()
         {
-            var result = await Mediator.Send(new GetAllFeatureFlagsQuery(organizationId));
+            var result = await Mediator.Send(new GetAllFeatureFlagsQuery());
             return Success(result.Data!); // ApiResponse wrapper'ı içinde zaten
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Archive(Guid id)
         {
@@ -42,7 +43,7 @@ namespace Switchly.API.Controllers
 
             return Success(result.Data!);
         }
-        
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateFeatureFlagCommand command)
         {

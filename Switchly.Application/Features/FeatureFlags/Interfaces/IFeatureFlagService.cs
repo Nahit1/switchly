@@ -4,5 +4,5 @@ namespace Switchly.Application.FeatureFlags.Interfaces;
 
 public interface IFeatureFlagService
 {
-    Task<FeatureFlag> CreateFeatureFlagAsync(Guid organizationId, string key, string description, CancellationToken cancellationToken);
+    Task<FeatureFlag> CreateFeatureFlagAsync(Guid organizationId, string key, string name, string description, CancellationToken cancellationToken);
 }

@@ -14,7 +14,7 @@ public class FeatureFlagService : IFeatureFlagService
         _dbContext = dbContext;
     }
 
-    public async Task<FeatureFlag> CreateFeatureFlagAsync(Guid organizationId, string key, string description, CancellationToken cancellationToken)
+    public async Task<FeatureFlag> CreateFeatureFlagAsync(Guid organizationId, string key, string name, string description, CancellationToken cancellationToken)
     {
         // Aynı key zaten var mı kontrol et
         var exists = await _dbContext.FeatureFlags
@@ -25,12 +25,14 @@ public class FeatureFlagService : IFeatureFlagService
 
         var featureFlag = new FeatureFlag
         {
-            Id = Guid.NewGuid(),
             OrganizationId = organizationId,
             Key = key,
             Description = description,
             CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            UpdatedAt = DateTime.UtcNow,
+            IsArchived = false,
+            Name = name
+
         };
 
         await _dbContext.FeatureFlags.AddAsync(featureFlag, cancellationToken);

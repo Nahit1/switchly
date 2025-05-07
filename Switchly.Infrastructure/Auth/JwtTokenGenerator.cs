@@ -20,10 +20,10 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     {
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim("organizationId", organizationId.ToString()),
-            new Claim(ClaimTypes.Role, role)
+            new (JwtRegisteredClaimNames.Sub, userId.ToString()),
+            new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new ("organizationId", organizationId.ToString()),
+            new (ClaimTypes.Role, role)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));

@@ -7,6 +7,7 @@ public class FeatureFlag
     public Organization Organization { get; set; } = null!;
 
     public string Key { get; set; } = null!;
+    public string Name { get; set; } = null!;
     public string Description { get; set; } = string.Empty;
     public bool IsArchived { get; set; } = false;
 
@@ -15,6 +16,6 @@ public class FeatureFlag
 
     public ICollection<FeatureFlagEnvironment> FeatureFlagEnvironments { get; set; } = new List<FeatureFlagEnvironment>();
     public ICollection<SegmentRule> SegmentRules { get; set; } = new List<SegmentRule>();
-    
-    
+
+
 }

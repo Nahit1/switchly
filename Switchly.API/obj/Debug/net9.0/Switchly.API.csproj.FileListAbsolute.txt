@@ -269,3 +269,6 @@
 /Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Switchly.Infrastructure.dll
 /Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Switchly.Infrastructure.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll

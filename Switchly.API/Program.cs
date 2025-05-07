@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Switchly.Api.Middlewares;
+using Switchly.Application.Common.Interfaces;
 using Switchly.Application.FeatureFlags.Commands;
 using Switchly.Application.FeatureFlags.Commands.CreateFeatureFlag;
 using Switchly.Application.FeatureFlags.Interfaces;
@@ -12,12 +13,19 @@ using Switchly.Application.FeatureFlags.Services;
 using Switchly.Application.Features.Auth.Interfaces;
 using Switchly.Infrastructure.Auth;
 using Switchly.Persistence.Db;
+using Switchly.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddSwaggerGen();
+
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var jwtKey = jwtSettings["Key"]!;
@@ -39,6 +47,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddAuthorization();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -49,10 +59,21 @@ builder.Services.AddValidatorsFromAssembly(typeof(CreateFeatureFlagCommand).Asse
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-
+builder.Services.AddScoped<IUserContext, UserContext>();
 builder.Services.AddScoped<IFeatureFlagService, FeatureFlagService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IFeatureFlagEvaluator, FeatureFlagEvaluator>();
+
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("AllowAll", policy =>
+  {
+    policy
+      .AllowAnyOrigin()  // Geliştirme aşamasında açıyoruz, production'da kısıtlaman gerekebilir
+      .AllowAnyHeader()
+      .AllowAnyMethod();
+  });
+});
 
 
 var app = builder.Build();
@@ -63,15 +84,13 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 app.UseMiddleware<GlobalExceptionMiddleware>();
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication(); // önce authentication
-app.UseAuthorization(); 
+app.UseCors("AllowAll");
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

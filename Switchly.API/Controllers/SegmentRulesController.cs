@@ -8,11 +8,12 @@ using Switchly.Application.Features.SegmentRules.Queries.GetSegmentRulesByFeatur
 
 namespace Switchly.Api.Controllers;
 
-[Authorize(Roles = "Admin")]
+
 [Route("api/segment-rules")]
 public class SegmentRulesController : BaseApiController
 {
     [HttpPost]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public async Task<IActionResult> AddRule([FromBody] AddSegmentRuleCommand command)
     {
         var result = await Mediator.Send(command);
@@ -20,7 +21,7 @@ public class SegmentRulesController : BaseApiController
             ? Success(result.Data!, 201)
             : Error<Guid>(result.Error!);
     }
-    
+
     [HttpGet("{featureFlagId}")]
     public async Task<IActionResult> GetByFeatureFlagId(Guid featureFlagId)
     {
@@ -29,7 +30,7 @@ public class SegmentRulesController : BaseApiController
             ? Success(result.Data!)
             : Error<List<SegmentRuleDto>>(result.Error!);
     }
-    
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
