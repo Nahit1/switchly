@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Switchly.Application", "Swi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Switchly.Infrastructure", "Switchly.Infrastructure\Switchly.Infrastructure.csproj", "{8CCA605F-8D0D-411C-AA3B-310A9BD49073}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Switchly.Shared", "Switchly.Shared\Switchly.Shared.csproj", "{9D46F74E-E667-4A3A-B3F3-1C3E14978CC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisWorker", "RedisWorker\RedisWorker.csproj", "{75556EF1-B591-484C-B0BC-A7378382B2BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,14 @@ Global
 		{8CCA605F-8D0D-411C-AA3B-310A9BD49073}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CCA605F-8D0D-411C-AA3B-310A9BD49073}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CCA605F-8D0D-411C-AA3B-310A9BD49073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D46F74E-E667-4A3A-B3F3-1C3E14978CC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D46F74E-E667-4A3A-B3F3-1C3E14978CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D46F74E-E667-4A3A-B3F3-1C3E14978CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D46F74E-E667-4A3A-B3F3-1C3E14978CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75556EF1-B591-484C-B0BC-A7378382B2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75556EF1-B591-484C-B0BC-A7378382B2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75556EF1-B591-484C-B0BC-A7378382B2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75556EF1-B591-484C-B0BC-A7378382B2BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

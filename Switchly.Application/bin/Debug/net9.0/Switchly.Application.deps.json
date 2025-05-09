@@ -12,7 +12,8 @@
           "FluentValidation.DependencyInjectionExtensions": "12.0.0-preview1",
           "MediatR": "12.5.0",
           "Switchly.Domain": "1.0.0",
-          "Switchly.Persistence": "1.0.0"
+          "Switchly.Persistence": "1.0.0",
+          "Switchly.Shared": "1.0.0"
         },
         "runtime": {
           "Switchly.Application.dll": {}
@@ -239,6 +240,14 @@
             "fileVersion": "1.0.0.0"
           }
         }
+      },
+      "Switchly.Shared/1.0.0": {
+        "runtime": {
+          "Switchly.Shared.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -387,6 +396,11 @@
       "sha512": ""
     },
     "Switchly.Persistence/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Switchly.Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,17 +1,20 @@
 using System.Text;
 using FluentValidation;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Switchly.Api.Middlewares;
 using Switchly.Application.Common.Interfaces;
+using Switchly.Application.Common.Messaging;
 using Switchly.Application.FeatureFlags.Commands;
 using Switchly.Application.FeatureFlags.Commands.CreateFeatureFlag;
 using Switchly.Application.FeatureFlags.Interfaces;
 using Switchly.Application.FeatureFlags.Services;
 using Switchly.Application.Features.Auth.Interfaces;
 using Switchly.Infrastructure.Auth;
+using Switchly.Infrastructure.Messaging;
 using Switchly.Persistence.Db;
 using Switchly.Infrastructure.Services;
 
@@ -57,12 +60,18 @@ builder.Services.AddMediatR(cfg =>
 
 builder.Services.AddValidatorsFromAssembly(typeof(CreateFeatureFlagCommand).Assembly);
 
+builder.Services.AddScoped<IEvaluateEventPublisher, MassTransitEvaluateEventPublisher>();
+builder.Services.AddSingleton<IRedisKeyProvider, RedisKeyProvider>();
+
+
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 builder.Services.AddScoped<IUserContext, UserContext>();
 builder.Services.AddScoped<IFeatureFlagService, FeatureFlagService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IFeatureFlagEvaluator, FeatureFlagEvaluator>();
+
+
 
 builder.Services.AddCors(options =>
 {
@@ -72,6 +81,18 @@ builder.Services.AddCors(options =>
       .AllowAnyOrigin()  // Geliştirme aşamasında açıyoruz, production'da kısıtlaman gerekebilir
       .AllowAnyHeader()
       .AllowAnyMethod();
+  });
+});
+
+builder.Services.AddMassTransit(x =>
+{
+  x.UsingRabbitMq((context, cfg) =>
+  {
+    cfg.Host("rabbitmq://localhost", h =>
+    {
+      h.Username("guest");
+      h.Password("guest");
+    });
   });
 });
 

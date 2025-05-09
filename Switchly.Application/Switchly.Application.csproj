@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Switchly.Domain\Switchly.Domain.csproj" />
       <ProjectReference Include="..\Switchly.Persistence\Switchly.Persistence.csproj" />
+      <ProjectReference Include="..\Switchly.Shared\Switchly.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

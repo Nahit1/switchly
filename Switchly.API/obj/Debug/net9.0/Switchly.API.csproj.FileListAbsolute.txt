@@ -272,3 +272,10 @@
 /Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/MassTransit.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/MassTransit.Abstractions.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/MassTransit.RabbitMqTransport.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/RabbitMQ.Client.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Switchly.Shared.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/bin/Debug/net9.0/Switchly.Shared.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.API/obj/Debug/net9.0/Switchly.API.sourcelink.json

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Switchly.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7cbe8858d1221e708dd9a79cd00adbe8b3ca3ae4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a139dc1640922b841e70c8a984d7bc447fa81146")]
 [assembly: System.Reflection.AssemblyProductAttribute("Switchly.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Switchly.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

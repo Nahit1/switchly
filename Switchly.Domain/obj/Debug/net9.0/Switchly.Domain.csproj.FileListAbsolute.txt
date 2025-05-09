@@ -9,3 +9,4 @@
 /Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/refint/Switchly.Domain.dll
 /Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.pdb
 /Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/ref/Switchly.Domain.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.sourcelink.json

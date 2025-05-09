@@ -1,5 +1,5 @@
 public class EvaluateFeatureFlagRequest
 {
     public string FlagKey { get; set; } = null!;
-    public UserContextModel UserContextModel { get; set; } = null!;
+    public UserSegmentContextModel UserContextModel { get; set; } = null!;
 }

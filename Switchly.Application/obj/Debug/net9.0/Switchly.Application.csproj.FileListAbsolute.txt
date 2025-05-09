@@ -15,3 +15,6 @@
 /Users/nahitferhat/Desktop/Switchly/Switchly.Application/obj/Debug/net9.0/refint/Switchly.Application.dll
 /Users/nahitferhat/Desktop/Switchly/Switchly.Application/obj/Debug/net9.0/Switchly.Application.pdb
 /Users/nahitferhat/Desktop/Switchly/Switchly.Application/obj/Debug/net9.0/ref/Switchly.Application.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Application/bin/Debug/net9.0/Switchly.Shared.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Application/bin/Debug/net9.0/Switchly.Shared.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.Application/obj/Debug/net9.0/Switchly.Application.sourcelink.json

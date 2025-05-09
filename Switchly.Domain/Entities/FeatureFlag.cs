@@ -10,6 +10,7 @@ public class FeatureFlag
     public string Name { get; set; } = null!;
     public string Description { get; set; } = string.Empty;
     public bool IsArchived { get; set; } = false;
+    public bool IsEnabled { get; set; } = true;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;

@@ -15,3 +15,4 @@
 /Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.pdb
 /Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.genruntimeconfig.cache
 /Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/ref/Switchly.Persistence.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/obj/Debug/net9.0/Switchly.Persistence.sourcelink.json

@@ -1,0 +1,12 @@
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/bin/Debug/net9.0/Switchly.Shared.deps.json
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/bin/Debug/net9.0/Switchly.Shared.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/bin/Debug/net9.0/Switchly.Shared.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.AssemblyInfoInputs.cache
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.AssemblyInfo.cs
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.csproj.CoreCompileInputs.cache
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.sourcelink.json
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/refint/Switchly.Shared.dll
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.pdb
+/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/ref/Switchly.Shared.dll

@@ -349,6 +349,16 @@
         "runtime": {
           "bin/placeholder/Switchly.Persistence.dll": {}
         }
+      },
+      "Switchly.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Switchly.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Switchly.Shared.dll": {}
+        }
       }
     }
   },
@@ -833,6 +843,11 @@
       "type": "project",
       "path": "../Switchly.Persistence/Switchly.Persistence.csproj",
       "msbuildProject": "../Switchly.Persistence/Switchly.Persistence.csproj"
+    },
+    "Switchly.Shared/1.0.0": {
+      "type": "project",
+      "path": "../Switchly.Shared/Switchly.Shared.csproj",
+      "msbuildProject": "../Switchly.Shared/Switchly.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -841,7 +856,8 @@
       "FluentValidation.DependencyInjectionExtensions >= 12.0.0-preview1",
       "MediatR >= 12.5.0",
       "Switchly.Domain >= 1.0.0",
-      "Switchly.Persistence >= 1.0.0"
+      "Switchly.Persistence >= 1.0.0",
+      "Switchly.Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -875,6 +891,9 @@
             },
             "/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/Switchly.Persistence.csproj": {
               "projectPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/Switchly.Persistence.csproj"
+            },
+            "/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/Switchly.Shared.csproj": {
+              "projectPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/Switchly.Shared.csproj"
             }
           }
         }
