@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Switchly.Persistence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a139dc1640922b841e70c8a984d7bc447fa81146")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+920b6d998061609d2858bd45e80f4ddc61d80c61")]
 [assembly: System.Reflection.AssemblyProductAttribute("Switchly.Persistence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Switchly.Persistence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
