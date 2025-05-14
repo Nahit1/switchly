@@ -7744,39 +7744,39 @@
     ]
   },
   "packageFolders": {
-    "/Users/nahitferhat/.nuget/packages/": {}
+    "/Users/ferhat.ektas/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nahitferhat/Desktop/Switchly/Switchly.API/Switchly.API.csproj",
+      "projectUniqueName": "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.API/Switchly.API.csproj",
       "projectName": "Switchly.API",
-      "projectPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.API/Switchly.API.csproj",
-      "packagesPath": "/Users/nahitferhat/.nuget/packages/",
-      "outputPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.API/obj/",
+      "projectPath": "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.API/Switchly.API.csproj",
+      "packagesPath": "/Users/ferhat.ektas/.nuget/packages/",
+      "outputPath": "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.API/obj/",
       "projectStyle": "PackageReference",
-      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "/Users/nahitferhat/.nuget/NuGet/NuGet.Config"
+        "/Users/ferhat.ektas/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://olympus-packages.marsathletic.com/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/nahitferhat/Desktop/Switchly/Switchly.Application/Switchly.Application.csproj": {
-              "projectPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Application/Switchly.Application.csproj"
+            "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Application/Switchly.Application.csproj": {
+              "projectPath": "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Application/Switchly.Application.csproj"
             },
-            "/Users/nahitferhat/Desktop/Switchly/Switchly.Infrastructure/Switchly.Infrastructure.csproj": {
-              "projectPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Infrastructure/Switchly.Infrastructure.csproj"
+            "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Infrastructure/Switchly.Infrastructure.csproj": {
+              "projectPath": "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Infrastructure/Switchly.Infrastructure.csproj"
             },
-            "/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/Switchly.Persistence.csproj": {
-              "projectPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Persistence/Switchly.Persistence.csproj"
+            "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Persistence/Switchly.Persistence.csproj": {
+              "projectPath": "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Persistence/Switchly.Persistence.csproj"
             }
           }
         }
@@ -7789,8 +7789,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
-      }
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -7838,7 +7839,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/ferhat.ektas/.dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
