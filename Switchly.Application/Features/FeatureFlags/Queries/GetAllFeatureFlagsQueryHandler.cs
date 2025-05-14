@@ -21,15 +21,24 @@ public class GetAllFeatureFlagsQueryHandler : IRequestHandler<GetAllFeatureFlags
     public async Task<ApiResponse<List<FeatureFlagDto>>> Handle(GetAllFeatureFlagsQuery request, CancellationToken cancellationToken)
     {
         var orgId = _userContext.OrganizationId;
-        var flags = await _dbContext.FeatureFlags
+        var flags = await _dbContext.FeatureFlags.Include(x=>x.SegmentRules)
             .Where(f => f.OrganizationId == orgId && !f.IsArchived)
             .Select(f => new FeatureFlagDto
             {
                 Id = f.Id,
                 Key = f.Key,
+                Name = f.Name,
                 Description = f.Description,
-                IsArchived = f.IsArchived,
-                CreatedAt = f.CreatedAt
+                IsEnabled = f.IsEnabled,
+                CreatedAt = f.CreatedAt,
+                FeatureSegments = f.SegmentRules.Select(item => new FeatureSegment
+                {
+                  Property = item.Property,
+                  Value = item.Value,
+                  Operator = item.Operator,
+                  RolloutPercentage = item.RolloutPercentage,
+                }).ToList()
+
             })
             .ToListAsync(cancellationToken);
 

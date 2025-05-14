@@ -39,7 +39,7 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
           : EvaluateSegmentRules(flag, userSegmentContextModel);
 
         // 🔑 Redis key her zaman SHA256 hash ile üretilecek
-        var redisKey = _redisKeyProvider.GetHashedKey(flag.Organization.ClientKey, flag.Key, userSegmentContextModel, hasSegmentRules);
+        var redisKey = _redisKeyProvider.GetHashedKey(flag.Organization.ClientKey, flag.Key, userSegmentContextModel);
 
 
         // 🚀 Event publish (tek key kullanıyoruz artık)
@@ -50,7 +50,7 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
           isEnabled,
           DateTime.UtcNow,
           flag.Organization.ClientKey,
-          new List<string> { redisKey } // her zaman hashli
+          redisKey // her zaman hashli
         );
 
         await _eventPublisher.PublishAsync(@event);
@@ -58,6 +58,8 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
         return isEnabled;
 
     }
+
+
 
 
     private bool EvaluateSegmentRules(FeatureFlag flag, UserSegmentContextModel userSegmentContextModel)
@@ -72,11 +74,13 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
           contextProperties.Add((kvp.Key, kvp.Value));
         }
       }
-
+      var segmentCount = flag.SegmentRules.Where(x => x.FeatureFlagId == flag.Id);
+      if (contextProperties.Count() < segmentCount.Count()) return false;
       foreach (var prop in contextProperties)
       {
         if (!string.IsNullOrWhiteSpace(prop.Value))
         {
+
           var segment = flag.SegmentRules
             .FirstOrDefault(c => c.Property.Equals(prop.Property, StringComparison.OrdinalIgnoreCase)&&
                                  c.Value.Equals(prop.Value, StringComparison.OrdinalIgnoreCase));

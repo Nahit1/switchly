@@ -4,17 +4,18 @@ using Switchly.Application.Common.Interfaces;
 
 public class RedisKeyProvider : IRedisKeyProvider
 {
-  public string GetHashedKey(string clientKey, string flagKey, UserSegmentContextModel user, bool hasSegmentRules)
+  public string GetHashedKey(string clientKey, string flagKey, UserSegmentContextModel user)
   {
-    if (user.Traits.Count == 0)
-    {
-      return $"{clientKey}:feature:{flagKey}";
-    }
-    // if (!hasSegmentRules)
+    // if (user.Traits.Count == 0)
+    // {
     //   return $"{clientKey}:feature:{flagKey}";
-
-    var hash = GenerateContextHash(user);
-    return $"{clientKey}:feature:{flagKey}:{hash}";
+    // }
+    // // if (!hasSegmentRules)
+    // //   return $"{clientKey}:feature:{flagKey}";
+    //
+    // var hash = GenerateContextHash(user);
+    // return $"{clientKey}:feature:{flagKey}:env:{user.Env}:{hash}";
+    return $"{clientKey}:feature:{flagKey}:env:{user.Env}";
   }
 
   private string GenerateContextHash(UserSegmentContextModel user)

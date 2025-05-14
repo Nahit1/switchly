@@ -11,7 +11,7 @@ var host = Host.CreateDefaultBuilder(args)
 
     // Redis bağlantısı
     services.AddSingleton<IConnectionMultiplexer>(
-      ConnectionMultiplexer.Connect("localhost")); // Docker içindeysen "redis" olabilir
+      ConnectionMultiplexer.Connect("localhost,allowAdmin=true")); // Docker içindeysen "redis" olabilir
 
     // MassTransit + Consumer tanımı
     services.AddMassTransit(x =>

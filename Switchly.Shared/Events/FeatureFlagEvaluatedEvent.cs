@@ -7,6 +7,6 @@ public record FeatureFlagEvaluatedEvent(
   bool IsEnabled,
   DateTime EvaluatedAt,
   string ClientKey,
-  List<string> RedisKeys // her zaman hashli olarak gönderilecek
+  string RedisKeys // her zaman hashli olarak gönderilecek
 );
 
