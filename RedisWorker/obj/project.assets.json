@@ -1893,33 +1893,33 @@
     ]
   },
   "packageFolders": {
-    "/Users/nahitferhat/.nuget/packages/": {}
+    "/Users/ferhat.ektas/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nahitferhat/Desktop/Switchly/RedisWorker/RedisWorker.csproj",
+      "projectUniqueName": "/Users/ferhat.ektas/Documents/Projects/switchly/RedisWorker/RedisWorker.csproj",
       "projectName": "RedisWorker",
-      "projectPath": "/Users/nahitferhat/Desktop/Switchly/RedisWorker/RedisWorker.csproj",
-      "packagesPath": "/Users/nahitferhat/.nuget/packages/",
-      "outputPath": "/Users/nahitferhat/Desktop/Switchly/RedisWorker/obj/",
+      "projectPath": "/Users/ferhat.ektas/Documents/Projects/switchly/RedisWorker/RedisWorker.csproj",
+      "packagesPath": "/Users/ferhat.ektas/.nuget/packages/",
+      "outputPath": "/Users/ferhat.ektas/Documents/Projects/switchly/RedisWorker/obj/",
       "projectStyle": "PackageReference",
-      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "/Users/nahitferhat/.nuget/NuGet/NuGet.Config"
+        "/Users/ferhat.ektas/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://olympus-packages.marsathletic.com/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/Switchly.Shared.csproj": {
-              "projectPath": "/Users/nahitferhat/Desktop/Switchly/Switchly.Shared/Switchly.Shared.csproj"
+            "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/Switchly.Shared.csproj": {
+              "projectPath": "/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/Switchly.Shared.csproj"
             }
           }
         }
@@ -1932,8 +1932,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
-      }
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -1972,7 +1973,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/ferhat.ektas/.dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
