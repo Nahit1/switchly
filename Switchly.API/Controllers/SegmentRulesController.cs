@@ -9,7 +9,7 @@ using Switchly.Application.Features.SegmentRules.Queries.GetSegmentRulesByFeatur
 namespace Switchly.Api.Controllers;
 
 
-[Route("api/segment-rules")]
+
 public class SegmentRulesController : BaseApiController
 {
     [HttpPost]

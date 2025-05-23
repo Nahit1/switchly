@@ -427,7 +427,7 @@
         },
         "runtime": {
           "Switchly.Application.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -435,7 +435,7 @@
       "Switchly.Domain/1.0.0": {
         "runtime": {
           "Switchly.Domain.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -448,7 +448,7 @@
         },
         "runtime": {
           "Switchly.Persistence.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -456,7 +456,7 @@
       "Switchly.Shared/1.0.0": {
         "runtime": {
           "Switchly.Shared.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }

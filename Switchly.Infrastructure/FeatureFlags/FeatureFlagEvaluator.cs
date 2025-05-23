@@ -28,16 +28,20 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
         var flag = await _dbContext.FeatureFlags
             .Include(f => f.SegmentRules)
             .Include(o=>o.Organization)
-            .FirstOrDefaultAsync(f => f.Key == flagKey && !f.IsArchived && f.IsEnabled);
+            .FirstOrDefaultAsync(f => f.Key == flagKey && !f.IsArchived);
 
         if (flag is null)
             return false;
 
-        var hasSegmentRules = flag.SegmentRules is { Count: > 0 };
-        var isEnabled = !hasSegmentRules
-          ? flag.IsEnabled
-          : EvaluateSegmentRules(flag, userSegmentContextModel);
 
+        bool isEnabled = flag.IsEnabled;
+        if (isEnabled)
+        {
+          var hasSegmentRules = flag.SegmentRules is { Count: > 0 };
+          isEnabled = !hasSegmentRules
+            ? flag.IsEnabled
+            : EvaluateSegmentRules(flag, userSegmentContextModel);
+        }
         // 🔑 Redis key her zaman SHA256 hash ile üretilecek
         var redisKey = _redisKeyProvider.GetHashedKey(flag.Organization.ClientKey, flag.Key, userSegmentContextModel);
 
@@ -80,16 +84,27 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
       {
         if (!string.IsNullOrWhiteSpace(prop.Value))
         {
+          // var segment = flag.SegmentRules
+          //   .FirstOrDefault(c => c.Property.Equals(prop.Property, StringComparison.OrdinalIgnoreCase)&&
+          //                        c.Value.Equals(prop.Value, StringComparison.OrdinalIgnoreCase));
 
           var segment = flag.SegmentRules
-            .FirstOrDefault(c => c.Property.Equals(prop.Property, StringComparison.OrdinalIgnoreCase)&&
-                                 c.Value.Equals(prop.Value, StringComparison.OrdinalIgnoreCase));
+            .FirstOrDefault(c => c.Property.Equals(prop.Property, StringComparison.OrdinalIgnoreCase));
 
           if (segment is null) return false;
           if (string.IsNullOrWhiteSpace(segment.Value) || !Evaluate(segment.Operator, segment.Value, segment.Value))
           {
             return false; // kural eşleşmedi
           }
+
+          var minRollout = flag.SegmentRules.Min(r => r.RolloutPercentage);
+
+          if (minRollout >= 100)
+            return true;
+
+          var hash = ComputeDeterministicHash(prop.Value, flag.Key);
+          return hash % 100 < minRollout;
+
         }
 
       }
@@ -134,21 +149,24 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
 
     private bool Evaluate(string op, string input, string expected)
     {
-        return op switch
-        {
-            "equals" => input == expected,
-            "not_equals" => input != expected,
-            "contains" => input.Contains(expected),
-            "starts_with" => input.StartsWith(expected),
-            "ends_with" => input.EndsWith(expected),
-            _ => false
-        };
+      return op switch
+      {
+        "equals" => string.Equals(input, expected, StringComparison.OrdinalIgnoreCase),
+        "not_equals" => !string.Equals(input, expected, StringComparison.OrdinalIgnoreCase),
+        "contains" => input?.Contains(expected, StringComparison.OrdinalIgnoreCase) == true,
+        "starts_with" => input?.StartsWith(expected, StringComparison.OrdinalIgnoreCase) == true,
+        "ends_with" => input?.EndsWith(expected, StringComparison.OrdinalIgnoreCase) == true,
+        "in" => expected
+          ?.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+          .Contains(input, StringComparer.OrdinalIgnoreCase) == true,
+        _ => false
+      };
     }
 
-    private int ComputeDeterministicHash(string userId, string flagKey)
+    private int ComputeDeterministicHash(string val, string flagKey)
     {
         using var sha = SHA256.Create();
-        var input = $"{userId}:{flagKey}";
+        var input = $"{val}:{flagKey}";
         var hashBytes = sha.ComputeHash(Encoding.UTF8.GetBytes(input));
         return BitConverter.ToInt32(hashBytes, 0) & int.MaxValue;
     }

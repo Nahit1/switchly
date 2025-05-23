@@ -10,3 +10,15 @@
 /Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.pdb
 /Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/ref/Switchly.Domain.dll
 /Users/nahitferhat/Desktop/Switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.sourcelink.json
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/bin/Debug/net9.0/Switchly.Domain.deps.json
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/bin/Debug/net9.0/Switchly.Domain.dll
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/bin/Debug/net9.0/Switchly.Domain.pdb
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.AssemblyInfoInputs.cache
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.AssemblyInfo.cs
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.csproj.CoreCompileInputs.cache
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.sourcelink.json
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.dll
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/refint/Switchly.Domain.dll
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/Switchly.Domain.pdb
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Domain/obj/Debug/net9.0/ref/Switchly.Domain.dll

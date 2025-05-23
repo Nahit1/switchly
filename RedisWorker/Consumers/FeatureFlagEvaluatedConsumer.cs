@@ -61,7 +61,7 @@ public class FeatureFlagEvaluatedConsumer:IConsumer<FeatureFlagEvaluatedEvent>
     var result = new
     {
       FlagKey = msg.FlagKey,
-      IsEnabled = true,
+      IsEnabled = msg.IsEnabled,
       Traits = msg.UserContextModel.Traits,
       Environment = msg.UserContextModel.Env,
     };

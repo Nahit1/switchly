@@ -21,6 +21,7 @@ public class FeatureFlagDto
 
 public class FeatureSegment
 {
+  public Guid Id { get; set; }
   public string Property { get; set; } = null!;    // user.role
   public string Operator { get; set; } = "equals"; // equals, contains, starts_with
   public string Value { get; set; } = null!;

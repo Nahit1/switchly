@@ -5,5 +5,6 @@ namespace Switchly.Application.FeatureFlags.Commands.UpdateFeatureFlag;
 
 public record UpdateFeatureFlagCommand(
     Guid Id,
-    string Description
+    string Description,
+    bool IsEnabled
 ) : IRequest<ApiResponse<bool>>;

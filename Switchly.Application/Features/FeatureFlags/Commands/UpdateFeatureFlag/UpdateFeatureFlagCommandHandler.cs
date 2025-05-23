@@ -22,7 +22,8 @@ public class UpdateFeatureFlagCommandHandler : IRequestHandler<UpdateFeatureFlag
         if (flag is null)
             return ApiResponse<bool>.Fail("Feature flag bulunamadı.");
 
-        flag.Description = request.Description;
+        flag.IsEnabled = request.IsEnabled;
+
         flag.UpdatedAt = DateTime.UtcNow;
 
         await _dbContext.SaveChangesAsync(cancellationToken);

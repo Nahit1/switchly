@@ -33,6 +33,7 @@ public class GetAllFeatureFlagsQueryHandler : IRequestHandler<GetAllFeatureFlags
                 CreatedAt = f.CreatedAt,
                 FeatureSegments = f.SegmentRules.Select(item => new FeatureSegment
                 {
+                  Id = item.Id,
                   Property = item.Property,
                   Value = item.Value,
                   Operator = item.Operator,

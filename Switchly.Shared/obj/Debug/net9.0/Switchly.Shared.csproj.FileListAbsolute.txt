@@ -10,3 +10,15 @@
 /Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/refint/Switchly.Shared.dll
 /Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.pdb
 /Users/nahitferhat/Desktop/Switchly/Switchly.Shared/obj/Debug/net9.0/ref/Switchly.Shared.dll
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/bin/Debug/net9.0/Switchly.Shared.deps.json
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/bin/Debug/net9.0/Switchly.Shared.dll
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/bin/Debug/net9.0/Switchly.Shared.pdb
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.AssemblyInfoInputs.cache
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.AssemblyInfo.cs
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.csproj.CoreCompileInputs.cache
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.sourcelink.json
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.dll
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/refint/Switchly.Shared.dll
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/Switchly.Shared.pdb
+/Users/ferhat.ektas/Documents/Projects/switchly/Switchly.Shared/obj/Debug/net9.0/ref/Switchly.Shared.dll

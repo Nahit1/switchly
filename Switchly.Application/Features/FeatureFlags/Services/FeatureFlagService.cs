@@ -20,6 +20,8 @@ public class FeatureFlagService : IFeatureFlagService
         var exists = await _dbContext.FeatureFlags
             .AnyAsync(f => f.OrganizationId == organizationId && f.Key == key, cancellationToken);
 
+
+
         if (exists)
             throw new InvalidOperationException($"Feature flag with key '{key}' already exists.");
 
@@ -31,11 +33,12 @@ public class FeatureFlagService : IFeatureFlagService
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
             IsArchived = false,
+            IsEnabled = true,
             Name = name
 
         };
 
-        await _dbContext.FeatureFlags.AddAsync(featureFlag, cancellationToken);
+        var data = await _dbContext.FeatureFlags.AddAsync(featureFlag, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
 
         return featureFlag;
