@@ -22,7 +22,6 @@ public class GetSegmentRulesByFeatureIdQueryHandler
     {
         var rules = await _dbContext.SegmentRules
             .Where(r => r.FeatureFlagId == request.FeatureFlagId)
-            .OrderBy(r => r.Order)
             .Select(r => new SegmentRuleDto
             {
                 Id = r.Id,
@@ -30,7 +29,6 @@ public class GetSegmentRulesByFeatureIdQueryHandler
                 Operator = r.Operator,
                 Value = r.Value,
                 RolloutPercentage = r.RolloutPercentage,
-                Order = r.Order
             })
             .ToListAsync(cancellationToken);
 

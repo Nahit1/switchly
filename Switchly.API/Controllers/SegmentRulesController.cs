@@ -4,6 +4,7 @@ using Switchly.Api.Controllers;
 using Switchly.Application.Features.SegmentRules.Commands.AddSegmentRule;
 using Switchly.Application.Features.SegmentRules.Commands.DeleteSegmentRule;
 using Switchly.Application.Features.SegmentRules.Dtos;
+using Switchly.Application.Features.SegmentRules.Queries.GetSegmentExpressionTree;
 using Switchly.Application.Features.SegmentRules.Queries.GetSegmentRulesByFeatureId;
 
 namespace Switchly.Api.Controllers;
@@ -40,5 +41,25 @@ public class SegmentRulesController : BaseApiController
             ? Success(result.Data!)
             : Error<bool>(result.Error!);
     }
+
+    [HttpGet("{featureFlagId}/segment-tree")]
+    public async Task<IActionResult> GetSegmentTree(Guid featureFlagId)
+    {
+      var result = await Mediator.Send(new GetSegmentExpressionTreeQuery(featureFlagId));
+      return result is not null ? Ok(result) : NotFound();
+    }
+
+    [HttpPost("{featureFlagId}/segment-tree")]
+    public async Task<IActionResult> CreateSegmentTree(Guid featureFlagId, [FromBody] SegmentExpressionDto root)
+    {
+      var rootId = await Mediator.Send(new CreateSegmentExpressionTreeCommand
+      {
+          FeatureFlagId = featureFlagId,
+          Root = root
+      });
+
+      return CreatedAtAction(nameof(GetSegmentTree), new { featureFlagId }, new { rootId });
+    }
+
 
 }

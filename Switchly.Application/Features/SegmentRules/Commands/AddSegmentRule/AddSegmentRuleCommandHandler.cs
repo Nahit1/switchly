@@ -24,7 +24,6 @@ public class AddSegmentRuleCommandHandler : IRequestHandler<AddSegmentRuleComman
             Operator = request.Operator,
             Value = request.Value,
             RolloutPercentage = request.RolloutPercentage,
-            Order = request.Order
         };
 
         await _dbContext.SegmentRules.AddAsync(rule, cancellationToken);

@@ -17,6 +17,8 @@ public class FeatureFlag
 
     public ICollection<FeatureFlagEnvironment> FeatureFlagEnvironments { get; set; } = new List<FeatureFlagEnvironment>();
     public ICollection<SegmentRule> SegmentRules { get; set; } = new List<SegmentRule>();
+    public ICollection<SegmentExpression> SegmentExpressions { get; set; } = new List<SegmentExpression>();
+
 
 
 }

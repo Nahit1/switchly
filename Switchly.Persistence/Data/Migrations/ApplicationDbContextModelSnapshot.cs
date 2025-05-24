@@ -146,6 +146,36 @@ namespace Switchly.Persistence.Data.Migrations
                     b.ToTable("Organizations");
                 });
 
+            modelBuilder.Entity("Switchly.Domain.Entities.SegmentExpression", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FeatureFlagId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Operator")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<Guid?>("ParentExpressionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("SegmentRuleId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FeatureFlagId");
+
+                    b.HasIndex("ParentExpressionId");
+
+                    b.HasIndex("SegmentRuleId");
+
+                    b.ToTable("SegmentExpressions", (string)null);
+                });
+
             modelBuilder.Entity("Switchly.Domain.Entities.SegmentRule", b =>
                 {
                     b.Property<Guid>("Id")
@@ -159,9 +189,6 @@ namespace Switchly.Persistence.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Property")
                         .IsRequired()
@@ -264,6 +291,31 @@ namespace Switchly.Persistence.Data.Migrations
                     b.Navigation("Organization");
                 });
 
+            modelBuilder.Entity("Switchly.Domain.Entities.SegmentExpression", b =>
+                {
+                    b.HasOne("Switchly.Domain.Entities.FeatureFlag", "FeatureFlag")
+                        .WithMany("SegmentExpressions")
+                        .HasForeignKey("FeatureFlagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Switchly.Domain.Entities.SegmentExpression", "ParentExpression")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentExpressionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Switchly.Domain.Entities.SegmentRule", "SegmentRule")
+                        .WithMany()
+                        .HasForeignKey("SegmentRuleId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("FeatureFlag");
+
+                    b.Navigation("ParentExpression");
+
+                    b.Navigation("SegmentRule");
+                });
+
             modelBuilder.Entity("Switchly.Domain.Entities.SegmentRule", b =>
                 {
                     b.HasOne("Switchly.Domain.Entities.FeatureFlag", "FeatureFlag")
@@ -290,6 +342,8 @@ namespace Switchly.Persistence.Data.Migrations
                 {
                     b.Navigation("FeatureFlagEnvironments");
 
+                    b.Navigation("SegmentExpressions");
+
                     b.Navigation("SegmentRules");
                 });
 
@@ -310,6 +364,11 @@ namespace Switchly.Persistence.Data.Migrations
                     b.Navigation("FlagEnvironments");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Switchly.Domain.Entities.SegmentExpression", b =>
+                {
+                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }

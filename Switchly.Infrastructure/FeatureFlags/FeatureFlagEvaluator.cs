@@ -11,42 +11,36 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly IEvaluateEventPublisher _eventPublisher;
-    private readonly IRedisKeyProvider _redisKeyProvider;
 
     public FeatureFlagEvaluator(
         ApplicationDbContext dbContext,
-        IEvaluateEventPublisher eventPublisher,
-        IRedisKeyProvider redisKeyProvider)
+        IEvaluateEventPublisher eventPublisher)
     {
         _dbContext = dbContext;
         _eventPublisher = eventPublisher;
-        _redisKeyProvider = redisKeyProvider;
     }
 
     public async Task<bool> IsEnabledAsync(string flagKey, UserSegmentContextModel userSegmentContextModel)
     {
         var flag = await _dbContext.FeatureFlags
-            .Include(f => f.SegmentRules)
-            .Include(o=>o.Organization)
-            .FirstOrDefaultAsync(f => f.Key == flagKey && !f.IsArchived);
+        .Include(f => f.Organization)
+        .FirstOrDefaultAsync(f => f.Key == flagKey && !f.IsArchived);
 
-        if (flag is null)
-            return false;
+        if (flag is null || !flag.IsEnabled)
+          return false;
 
+        var hasSegmentTree = await _dbContext.SegmentExpressions
+          .AnyAsync(x => x.FeatureFlagId == flag.Id && x.ParentExpressionId == null);
 
-        bool isEnabled = flag.IsEnabled;
-        if (isEnabled)
-        {
-          var hasSegmentRules = flag.SegmentRules is { Count: > 0 };
-          isEnabled = !hasSegmentRules
-            ? flag.IsEnabled
-            : EvaluateSegmentRules(flag, userSegmentContextModel);
-        }
-        // 🔑 Redis key her zaman SHA256 hash ile üretilecek
-        var redisKey = _redisKeyProvider.GetHashedKey(flag.Organization.ClientKey, flag.Key, userSegmentContextModel);
+        bool isEnabled = !hasSegmentTree
+          ? flag.IsEnabled
+          : await EvaluateSegmentTreeAsync(flag.Id, userSegmentContextModel.Traits);
 
 
-        // 🚀 Event publish (tek key kullanıyoruz artık)
+
+        var redisKey = $"{flag.Organization.ClientKey}:feature:{flag.Key}:env:{userSegmentContextModel.Env}";
+
+
         var @event = new FeatureFlagEvaluatedEvent(
           flag.Id,
           flag.Key,
@@ -54,7 +48,7 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
           isEnabled,
           DateTime.UtcNow,
           flag.Organization.ClientKey,
-          redisKey // her zaman hashli
+          redisKey
         );
 
         await _eventPublisher.PublishAsync(@event);
@@ -64,6 +58,77 @@ public class FeatureFlagEvaluator : IFeatureFlagEvaluator
     }
 
 
+    private async Task<bool> EvaluateSegmentTreeAsync(Guid featureFlagId, Dictionary<string, string> traits)
+    {
+        var root = await _dbContext.SegmentExpressions
+          .Include(x => x.SegmentRule)
+          .FirstOrDefaultAsync(x => x.FeatureFlagId == featureFlagId && x.ParentExpressionId == null);
+
+        if (root == null)
+          return false;
+
+        var fullTree = await LoadTreeRecursiveAsync(root.Id);
+        return EvaluateExpression(fullTree, traits);
+    }
+
+    private async Task<SegmentExpression> LoadTreeRecursiveAsync(Guid id)
+    {
+        var expr = await _dbContext.SegmentExpressions
+          .Include(x => x.SegmentRule)
+          .FirstOrDefaultAsync(x => x.Id == id);
+
+        var children = await _dbContext.SegmentExpressions
+          .Where(x => x.ParentExpressionId == id).ToListAsync();
+
+        foreach (var child in children)
+          expr.Children.Add(await LoadTreeRecursiveAsync(child.Id));
+
+        return expr;
+    }
+
+
+    private bool EvaluateExpression(SegmentExpression expr, Dictionary<string, string> traits)
+    {
+        if (expr.SegmentRule is not null)
+          return EvaluateRule(expr.SegmentRule, traits);
+
+        var results = expr.Children.Select(c => EvaluateExpression(c, traits)).ToList();
+
+        return expr.Operator?.ToUpperInvariant() switch
+        {
+          "AND" => results.All(x => x),
+          "OR" => results.Any(x => x),
+          "NOT" => !results.FirstOrDefault(),
+          _ => false
+        };
+    }
+
+    private bool EvaluateRule(SegmentRule rule, Dictionary<string, string> traits)
+    {
+        if (!traits.TryGetValue(rule.Property, out var inputValue))
+          return false;
+
+          var match = rule.Operator switch
+          {
+            "equals" => string.Equals(inputValue, rule.Value, StringComparison.OrdinalIgnoreCase),
+            "not_equals" => !string.Equals(inputValue, rule.Value, StringComparison.OrdinalIgnoreCase),
+            "contains" => inputValue.Contains(rule.Value, StringComparison.OrdinalIgnoreCase),
+            "starts_with" => inputValue.StartsWith(rule.Value, StringComparison.OrdinalIgnoreCase),
+            "ends_with" => inputValue.EndsWith(rule.Value, StringComparison.OrdinalIgnoreCase),
+            "in" => rule.Value.Split(',')
+              .Any(v => v.Trim().Equals(inputValue, StringComparison.OrdinalIgnoreCase)),
+            _ => false
+          };
+
+          if (!match)
+            return false;
+
+          if (rule.RolloutPercentage >= 100)
+            return true;
+
+          var hash = ComputeDeterministicHash(inputValue, rule.Property + ":" + rule.Value);
+          return hash % 100 < rule.RolloutPercentage;
+    }
 
 
     private bool EvaluateSegmentRules(FeatureFlag flag, UserSegmentContextModel userSegmentContextModel)

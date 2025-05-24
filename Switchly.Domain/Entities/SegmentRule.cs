@@ -11,5 +11,4 @@ public class SegmentRule
     public string Value { get; set; } = null!;
 
     public int RolloutPercentage { get; set; } = 100;
-    public int Order { get; set; } = 0;
 }

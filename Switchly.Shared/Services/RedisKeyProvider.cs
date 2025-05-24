@@ -6,15 +6,7 @@ public class RedisKeyProvider : IRedisKeyProvider
 {
   public string GetHashedKey(string clientKey, string flagKey, UserSegmentContextModel user)
   {
-    // if (user.Traits.Count == 0)
-    // {
-    //   return $"{clientKey}:feature:{flagKey}";
-    // }
-    // // if (!hasSegmentRules)
-    // //   return $"{clientKey}:feature:{flagKey}";
-    //
-    // var hash = GenerateContextHash(user);
-    // return $"{clientKey}:feature:{flagKey}:env:{user.Env}:{hash}";
+
     return $"{clientKey}:feature:{flagKey}:env:{user.Env}";
   }
 

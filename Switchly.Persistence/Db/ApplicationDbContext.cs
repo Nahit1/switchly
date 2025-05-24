@@ -8,7 +8,7 @@ public class ApplicationDbContext:DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) { }
-    
+
     public DbSet<Organization> Organizations => Set<Organization>();
     public DbSet<User> Users => Set<User>();
     public DbSet<FeatureFlag> FeatureFlags => Set<FeatureFlag>();
@@ -17,6 +17,7 @@ public class ApplicationDbContext:DbContext
 
 
     public DbSet<SegmentRule> SegmentRules => Set<SegmentRule>();
+    public DbSet<SegmentExpression> SegmentExpressions => Set<SegmentExpression>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

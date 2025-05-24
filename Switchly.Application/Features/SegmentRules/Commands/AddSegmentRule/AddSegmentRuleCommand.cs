@@ -8,6 +8,5 @@ public record AddSegmentRuleCommand(
     string Property,
     string Operator,
     string Value,
-    int RolloutPercentage = 100,
-    int Order = 0
+    int RolloutPercentage = 100
 ) : IRequest<ApiResponse<Guid>>;

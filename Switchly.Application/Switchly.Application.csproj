@@ -21,6 +21,8 @@
     <ItemGroup>
       <Folder Include="Common\Services\" />
       <Folder Include="Features\Auth\Services\" />
+      <Folder Include="Features\SegmentRules\Interfaces\" />
+      <Folder Include="Features\SegmentRules\Services\" />
     </ItemGroup>
 
 </Project>

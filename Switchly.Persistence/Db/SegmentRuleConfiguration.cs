@@ -13,7 +13,6 @@ public class SegmentRuleConfiguration : IEntityTypeConfiguration<SegmentRule>
         builder.Property(r => r.Operator).IsRequired().HasMaxLength(50);
         builder.Property(r => r.Value).IsRequired().HasMaxLength(200);
         builder.Property(r => r.RolloutPercentage).IsRequired();
-        builder.Property(r => r.Order).IsRequired();
 
         builder.HasOne(r => r.FeatureFlag)
             .WithMany(f => f.SegmentRules)
