@@ -81,10 +81,9 @@ builder.Services.AddCors(options =>
   options.AddPolicy("AllowAll", policy =>
   {
     policy
-      .AllowAnyOrigin()  // Geliştirme aşamasında açıyoruz, production'da kısıtlaman gerekebilir
+      .AllowAnyOrigin() // Geliştirme aşamasında açıyoruz, production'da kısıtlaman gerekebilir
       .AllowAnyHeader()
-      .AllowAnyMethod()
-      .AllowCredentials();
+      .AllowAnyMethod();
   });
 });
 
