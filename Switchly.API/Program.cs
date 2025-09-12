@@ -91,15 +91,17 @@ builder.Services.AddMassTransit(x =>
 {
   x.UsingRabbitMq((context, cfg) =>
   {
-    var rabbitHost = builder.Configuration["RabbitMQ:Host"] ?? "rabbitmq";
-    var rabbitUser = builder.Configuration["RabbitMQ:User"] ?? "guest";
-    var rabbitPass = builder.Configuration["RabbitMQ:Pass"] ?? "guest";
-
-    cfg.Host(rabbitHost, "/", h =>
-    {
-      h.Username(rabbitUser);
-      h.Password(rabbitPass);
-    });
+    var rabbitMqUri = builder.Configuration["RabbitMQ:Url"];
+    // var rabbitHost = builder.Configuration["RabbitMQ:Host"] ?? "rabbitmq";
+    // var rabbitUser = builder.Configuration["RabbitMQ:User"] ?? "guest";
+    // var rabbitPass = builder.Configuration["RabbitMQ:Pass"] ?? "guest";
+    //
+    // cfg.Host(rabbitHost, "/", h =>
+    // {
+    //   h.Username(rabbitUser);
+    //   h.Password(rabbitPass);
+    // });
+    cfg.Host(new Uri(rabbitMqUri));
   });
 });
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
