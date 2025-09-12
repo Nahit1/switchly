@@ -2,33 +2,37 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Sadece gereken projeleri kopyala (worker yok)
-COPY Switchly.API/Switchly.API.csproj Switchly.API/
-COPY Switchly.Application/Switchly.Application.csproj Switchly.Application/
-COPY Switchly.Persistence/Switchly.Persistence.csproj Switchly.Persistence/
-COPY Switchly.Domain/Switchly.Domain.csproj Switchly.Domain/
-COPY Switchly.Infrastructure/Switchly.Infrastructure.csproj Switchly.Infrastructure/
-COPY Switchly.Shared/Switchly.Shared.csproj Switchly.Shared/
+# Build ortamını sadeleştir (daha az indirme / RAM)
+ENV DOTNET_NOLOGO=1 \
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 \
+    DOTNET_CLI_TELEMETRY_OPTOUT=1 \
+    DOTNET_CLI_HOME=/tmp \
+    NUGET_XMLDOC_MODE=skip \
+    DOTNET_DISABLE_PARALLEL=1
 
-# (İsteğe bağlı ama yayın ortamlarında faydalı)
-ENV DOTNET_CLI_HOME=/tmp
-ENV NUGET_XMLDOC_MODE=skip
-
-# 1) Restore (ayrı, daha net log)
-RUN dotnet restore Switchly.API/Switchly.API.csproj -v minimal
-
-# Kaynakların tamamını kopyala
+# Basit ve sağlam: önce tüm kaynakları kopyala (cache daha az ama teşhis garantili)
 COPY . .
 
-# 2) Build (ayrı, publish'ten önce derle)
-RUN dotnet build Switchly.API/Switchly.API.csproj -c Release --no-restore -v minimal
+# SDK bilgisini yazdır (loglarda gözüksün)
+RUN dotnet --info
 
-# 3) Publish (daha az bellek tüketen bayraklarla)
-# - PublishReadyToRun=false : R2R kapalı (RAM ve süreyi düşürür)
-# - PublishSingleFile=false : tek dosya paketleme yok (RAM tüketimini düşürür)
-# - UseAppHost=false        : native host üretme
+# 1) Restore (full log)
+RUN dotnet restore Switchly.API/Switchly.API.csproj -v minimal
+
+# 2) Build (daha düşük RAM, analizörler kapalı, tek core)
+RUN dotnet build Switchly.API/Switchly.API.csproj -c Release --no-restore \
+    -v minimal /m:1 \
+    -p:RunAnalyzersDuringBuild=false \
+    -p:UseSharedCompilation=false \
+    -p:ContinuousIntegrationBuild=true
+
+# 3) Publish (R2R ve SingleFile kapalı → RAM düşer)
 RUN dotnet publish Switchly.API/Switchly.API.csproj -c Release --no-restore -o /app \
-    -p:PublishReadyToRun=false -p:PublishSingleFile=false -p:UseAppHost=false -v minimal
+    -v minimal \
+    -p:PublishReadyToRun=false \
+    -p:PublishSingleFile=false \
+    -p:UseAppHost=false \
+    -p:RunAnalyzersDuringBuild=false
 
 # ---------- runtime ----------
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
