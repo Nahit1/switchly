@@ -83,7 +83,8 @@ builder.Services.AddCors(options =>
     policy
       .AllowAnyOrigin()  // Geliştirme aşamasında açıyoruz, production'da kısıtlaman gerekebilir
       .AllowAnyHeader()
-      .AllowAnyMethod();
+      .AllowAnyMethod()
+      .AllowCredentials();
   });
 });
 
@@ -115,10 +116,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 app.UseMiddleware<GlobalExceptionMiddleware>();
-app.UseCors("AllowAll");
+
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseRouting();
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
