@@ -17,9 +17,6 @@ COPY . .
 RUN echo "=== DOTNET --INFO ===" && dotnet --info && \
     echo "=== GLOBAL.JSON (if any) ===" && (cat /src/global.json || echo "no global.json")
 
-# (Kritik) global.json'u devre dışı bırak – sürüm uyumsuzluğunu by-pass et
-RUN rm -f /src/global.json
-
 # 1) Restore (sadece nuget.org, paralel kapalı)
 RUN dotnet restore Switchly.API/Switchly.API.csproj \
     --disable-parallel --ignore-failed-sources \
