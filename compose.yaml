@@ -1,6 +1,24 @@
 ﻿version: '3.8'
 
 services:
+  worker:
+    build:
+      context: .
+      dockerfile: RedisWorker/Dockerfile
+    container_name: switchly-worker
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=switchly;Username=postgres;Password=postgrespw;Ssl Mode=Disable
+      RabbitMQ__Host: rabbitmq
+      RabbitMQ__User: guest
+      RabbitMQ__Pass: guest
+      Cache__Redis__Connection: redis:6379,abortConnect=false
+      Switchly__OrgClientKey: dev-org
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
   api:
     build:
       context: .                # repo kökü

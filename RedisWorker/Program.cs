@@ -7,36 +7,60 @@ using Switchly.Application.Common.Interfaces;
 var host = Host.CreateDefaultBuilder(args)
   .ConfigureServices((context, services) =>
   {
+    var config = context.Configuration;
+
     services.AddSingleton<IRedisKeyProvider, RedisKeyProvider>();
 
-    // Redis bağlantısı
-    services.AddSingleton<IConnectionMultiplexer>(
-      ConnectionMultiplexer.Connect("localhost,allowAdmin=true")); // Docker içindeysen "redis" olabilir
+    // ---------------- Redis ----------------
+    // ENV / appsettings key: Cache__Redis__Connection
+    // Örn (local compose): "redis:6379,abortConnect=false"
+    // Örn (Upstash/Prod): "<host>:6379,password=<pass>,ssl=true,abortConnect=false"
+    var redisConn = config["Cache:Redis:Connection"] ?? "redis:6379,abortConnect=false";
+    services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect(redisConn));
 
-    // MassTransit + Consumer tanımı
+    // ---------------- MassTransit / RabbitMQ ----------------
+    // İki kullanım desteklenir:
+    // 1) URI (MessageBus__RabbitMq__Host = amqp://user:pass@host:5672/)
+    // 2) Ayrı alanlar (RabbitMQ__Host, RabbitMQ__User, RabbitMQ__Pass)
+    var rabbitUri  = config["MessageBus:RabbitMq:Host"]; // amqp://... (opsiyonel)
+    var rabbitHost = config["RabbitMQ:Host"] ?? "rabbitmq";
+    var rabbitUser = config["RabbitMQ:User"] ?? "guest";
+    var rabbitPass = config["RabbitMQ:Pass"] ?? "guest";
+
     services.AddMassTransit(x =>
     {
-      x.AddConsumer<FeatureFlagEvaluatedConsumer>(); // 🟢 Consumer'ı bildir
+      // Consumer'ı kaydet
+      x.AddConsumer<FeatureFlagEvaluatedConsumer>();
 
       x.UsingRabbitMq((ctx, cfg) =>
       {
-        cfg.Host("rabbitmq://localhost", h =>
+        if (!string.IsNullOrWhiteSpace(rabbitUri) && rabbitUri.StartsWith("amqp", StringComparison.OrdinalIgnoreCase))
         {
-          h.Username("guest");
-          h.Password("guest");
-        });
+          // URI ile konfig (CloudAMQP/Prod için ideal)
+          cfg.Host(new Uri(rabbitUri));
+        }
+        else
+        {
+          // Host/User/Pass ile konfig (local compose için ideal)
+          cfg.Host(rabbitHost, "/", h =>
+          {
+            h.Username(rabbitUser);
+            h.Password(rabbitPass);
+          });
+        }
 
-        // 🟢 Exchange'e bağlanan queue tanımı
+        // Bağlantı/işleme retry (kuyruk geç açılırsa düşmesin)
+        cfg.UseMessageRetry(r => r.Interval(5, TimeSpan.FromSeconds(5)));
+
+        // Queue/endpoint → consumer eşlemesi
         cfg.ReceiveEndpoint("feature-flag-evaluated", e =>
         {
-          e.ConfigureConsumer<FeatureFlagEvaluatedConsumer>(ctx); // 🟢 Mesajı consumer'a yönlendir
+          e.ConfigureConsumer<FeatureFlagEvaluatedConsumer>(ctx);
         });
       });
     });
 
-
-
-    // Varsa Worker.cs için servis tanımı (zorunlu değil)
+    // Hosted service (Worker)
     services.AddHostedService<Worker>();
   })
   .Build();
