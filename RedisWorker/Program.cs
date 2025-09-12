@@ -34,6 +34,8 @@ var host = Host.CreateDefaultBuilder(args)
       });
     });
 
+
+
     // Varsa Worker.cs için servis tanımı (zorunlu değil)
     services.AddHostedService<Worker>();
   })
