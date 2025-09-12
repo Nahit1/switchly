@@ -91,20 +91,22 @@ builder.Services.AddMassTransit(x =>
 {
   x.UsingRabbitMq((context, cfg) =>
   {
-    cfg.Host("rabbitmq://localhost", h =>
+    var rabbitHost = builder.Configuration["RabbitMQ:Host"] ?? "rabbitmq";
+    var rabbitUser = builder.Configuration["RabbitMQ:User"] ?? "guest";
+    var rabbitPass = builder.Configuration["RabbitMQ:Pass"] ?? "guest";
+
+    cfg.Host(rabbitHost, "/", h =>
     {
-      h.Username("guest");
-      h.Password("guest");
+      h.Username(rabbitUser);
+      h.Password(rabbitPass);
     });
   });
 });
-
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -118,6 +120,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
+app.MapGet("/health", () => Results.Ok("ok"));
 app.Run();
 
