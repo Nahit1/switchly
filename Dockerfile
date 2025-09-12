@@ -1,40 +1,38 @@
-# ---------- build ----------
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Build ortamını sadeleştir (daha az indirme / RAM)
+# Ortam: düşük RAM/IO için sadeleştir
 ENV DOTNET_NOLOGO=1 \
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1 \
     DOTNET_CLI_TELEMETRY_OPTOUT=1 \
     DOTNET_CLI_HOME=/tmp \
     NUGET_XMLDOC_MODE=skip \
-    DOTNET_DISABLE_PARALLEL=1
+    DOTNET_DISABLE_PARALLEL=1 \
+    NUGET_PACKAGES=/tmp/nuget
 
-# Basit ve sağlam: önce tüm kaynakları kopyala (cache daha az ama teşhis garantili)
+# Tüm kaynakları önce kopyala (props/targets kaçmasın)
 COPY . .
 
-# SDK bilgisini yazdır (loglarda gözüksün)
+# (Teşhis) SDK bilgisi
 RUN dotnet --info
 
-# 1) Restore (full log)
-RUN dotnet restore Switchly.API/Switchly.API.csproj -v minimal
+# (Kaynakları temizle + nuget.org’u kesin ekle)
+RUN dotnet nuget locals all --clear && \
+    dotnet nuget remove source nuget.org || true && \
+    dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
 
-# 2) Build (daha düşük RAM, analizörler kapalı, tek core)
+# RESTORE (paralel kapalı, başarısız kaynakları yoksay)
+RUN dotnet restore Switchly.API/Switchly.API.csproj \
+    --disable-parallel --ignore-failed-sources --nologo -v minimal
+
+# BUILD (analizörler kapalı, tek çekirdek)
 RUN dotnet build Switchly.API/Switchly.API.csproj -c Release --no-restore \
-    -v minimal /m:1 \
-    -p:RunAnalyzersDuringBuild=false \
-    -p:UseSharedCompilation=false \
-    -p:ContinuousIntegrationBuild=true
+    -p:RunAnalyzersDuringBuild=false -p:UseSharedCompilation=false -v minimal
 
-# 3) Publish (R2R ve SingleFile kapalı → RAM düşer)
+# PUBLISH (R2R/SingleFile kapalı → RAM daha az)
 RUN dotnet publish Switchly.API/Switchly.API.csproj -c Release --no-restore -o /app \
-    -v minimal \
-    -p:PublishReadyToRun=false \
-    -p:PublishSingleFile=false \
-    -p:UseAppHost=false \
-    -p:RunAnalyzersDuringBuild=false
+    -p:PublishReadyToRun=false -p:PublishSingleFile=false -p:UseAppHost=false -p:RunAnalyzersDuringBuild=false -v minimal
 
-# ---------- runtime ----------
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app .
