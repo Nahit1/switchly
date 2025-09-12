@@ -16,11 +16,6 @@ COPY . .
 # (Teşhis) SDK bilgisi
 RUN dotnet --info
 
-# (Kaynakları temizle + nuget.org’u kesin ekle)
-RUN dotnet nuget locals all --clear && \
-    dotnet nuget remove source nuget.org || true && \
-    dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
-
 # RESTORE (paralel kapalı, başarısız kaynakları yoksay)
 RUN dotnet restore Switchly.API/Switchly.API.csproj \
     --disable-parallel --ignore-failed-sources --nologo -v minimal
