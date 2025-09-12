@@ -22,7 +22,7 @@ var host = Host.CreateDefaultBuilder(args)
     // İki kullanım desteklenir:
     // 1) URI (MessageBus__RabbitMq__Host = amqp://user:pass@host:5672/)
     // 2) Ayrı alanlar (RabbitMQ__Host, RabbitMQ__User, RabbitMQ__Pass)
-    var rabbitUri  = config["MessageBus:RabbitMq:Host"]; // amqp://... (opsiyonel)
+    var rabbitUri  = config["RabbitMq:Url"]; // amqp://... (opsiyonel)
     var rabbitHost = config["RabbitMQ:Host"] ?? "rabbitmq";
     var rabbitUser = config["RabbitMQ:User"] ?? "guest";
     var rabbitPass = config["RabbitMQ:Pass"] ?? "guest";
