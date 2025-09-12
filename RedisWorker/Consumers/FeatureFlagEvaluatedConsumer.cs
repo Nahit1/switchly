@@ -21,6 +21,8 @@ public class FeatureFlagEvaluatedConsumer:IConsumer<FeatureFlagEvaluatedEvent>
     _connection = connection;
   }
 
+
+
   public async Task Consume(ConsumeContext<FeatureFlagEvaluatedEvent> context)
   {
     var pattern = $"{context.Message.RedisKeys}";
