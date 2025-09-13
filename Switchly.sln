@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Switchly.API", "Switchly.API\Switchly.API.csproj", "{34DFBE68-5AE5-43FE-B1AF-00F8ADAB1E22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Switchly.Domain", "Switchly.Domain\Switchly.Domain.csproj", "{2B73937D-0896-47D3-A024-D1BF45CCA891}"
@@ -47,7 +48,5 @@ Global
 		{9D46F74E-E667-4A3A-B3F3-1C3E14978CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D46F74E-E667-4A3A-B3F3-1C3E14978CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D46F74E-E667-4A3A-B3F3-1C3E14978CC4}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
